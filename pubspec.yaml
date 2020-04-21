@@ -1,0 +1,13 @@
+name: exposure
+version: 1.0.0
+description: >
+  Sensor widget for flutter that notifies you when it is exposured
+author: northka.chen <northka.chen@gmail.com>
+dependencies:
+  toast: 0.1.4
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  pedantic: 1.8.0+1
+  flutter_test:
+    sdk: flutter
