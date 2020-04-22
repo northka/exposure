@@ -47,26 +47,29 @@ class _ExposureDialogState extends State<ExposureDialogExample> {
                   showDialog<bool>(
                     context: context,
                     builder: (context) {
-                      return ExposureDetector(key: Key('AlertDialog'),child: AlertDialog(
-                        title: Text("alert"),
-                        content: Text("are you sure?"),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text("cancel"),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                          FlatButton(
-                            child: Text("delete"),
-                            onPressed: () {
-                              // 执行删除操作
-                              Navigator.of(context).pop(true);
-                            },
-                          ),
-                        ],
-                      ),onExposure: (visibilityInfo) {
-                        Toast.show('alert dialog exposure', context);
-                      },)
-                      ;
+                      return ExposureDetector(
+                        key: Key('AlertDialog'),
+                        child: AlertDialog(
+                          title: Text("alert"),
+                          content: Text("are you sure?"),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("cancel"),
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                            FlatButton(
+                              child: Text("delete"),
+                              onPressed: () {
+                                // 执行删除操作
+                                Navigator.of(context).pop(true);
+                              },
+                            ),
+                          ],
+                        ),
+                        onExposure: (visibilityInfo) {
+                          Toast.show('alert dialog exposure', context);
+                        },
+                      );
                     },
                   );
                 },
@@ -95,9 +98,13 @@ class _ExposureDialogState extends State<ExposureDialogExample> {
                       );
                       //使用AlertDialog会报错
                       //return AlertDialog(content: child);
-                      return ExposureDetector(child: Dialog(child: child), key: Key('optional_dialog'),onExposure: (visibilityInfo) {
-                        Toast.show('option dialog exposure', context);
-                      },);
+                      return ExposureDetector(
+                        child: Dialog(child: child),
+                        key: Key('optional_dialog'),
+                        onExposure: (visibilityInfo) {
+                          Toast.show('option dialog exposure', context);
+                        },
+                      );
                     },
                   );
                 },

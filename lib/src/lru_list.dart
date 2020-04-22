@@ -1,9 +1,9 @@
 import 'dart:collection';
 
-class LruList<T>{
+class LruList<T> {
   final int maxLength;
   Queue<T> _list = new Queue();
-  
+
   LruList({this.maxLength});
 
   bool contains(T element) {
@@ -18,6 +18,6 @@ class LruList<T>{
   }
 
   int length() {
-    return  _list.length;
+    return _list.length;
   }
 }

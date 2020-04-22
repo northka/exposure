@@ -68,13 +68,13 @@ class _ExposureAnimateState extends State<ExposureAnimateExample>
               children: <Widget>[
                 AnimatedBulletScreenItem(
                   child: ExposureDetector(
-                    key: Key('exposure_animate_$bulletIndex'),
-                    child: BulletScreenItem(
-                      index: bulletIndex,
-                    ),onExposure: (visibilityInfo){
-                    Toast.show('第$bulletIndex 条弹幕曝光', context);
-                    }
-                  ),
+                      key: Key('exposure_animate_$bulletIndex'),
+                      child: BulletScreenItem(
+                        index: bulletIndex,
+                      ),
+                      onExposure: (visibilityInfo) {
+                        Toast.show('第$bulletIndex 条弹幕曝光', context);
+                      }),
                   animation: animation,
                 )
               ],

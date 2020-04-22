@@ -1,5 +1,46 @@
-Flutter Exposure Widget
+Exposure Widget
 ====
+This is a widget that can automatically monitor whether the child widget is exposed<br/>
+When the child widget is found in the window viewport, it begin detecting<br/> 
+When stay time exceeds the exposure time condition (default is 0.5s) and the exposure area is greater than the visibility fraction condition (default 50%)<br/>
+It will trigger the exposure callback and record the Key value in a queue (the default is to store up to 100 keys).
+Encounter the same key in the queue, no more exposure detection
 
-Install
+install
 ----
+Add this to your package's pubspec.yaml file
+```yaml
+dependencies:
+  exposure: ^1.0.0
+```
+use
+----
+```dart
+ExposureDetector({
+    key: Key('exposure'),  // Custom Key
+    child: childWidget, //Child Widget
+    exposure: callBack // Exposure Callback
+});
+```
+
+#### Examples
+
+[Scroll List Exposure](./example/exposureScrollExample.dart)
+
+![scroll Exposure](./assets/scrollExposure.gif)
+
+[Animate Exposure](./example/exposureAnimateExample.dart)
+
+![animateExposure](./assets/animateExposure.gif)
+
+[Dialog Exposure](./example/exposureDialogExample.dart)
+
+![dialogExposure](./assets/dialogExposure.gif)
+
+Configuration
+---
+
+* ExposureDetectorController.instance.setFilterList：Function Set key queue<br/>
+* ExposureDetectorController.instance.exposureTime：int Set exposure time condition (ms)<br/>
+* ExposureDetectorController.instance.exposureFraction：double Set visibility fraction condition<br/>
+* ExposureDetectorController.instance.updateInterval：Duration Set delay detection time

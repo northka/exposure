@@ -34,27 +34,30 @@ class _ExposureScrollState extends State<ExposureScrollExample> {
         ),
         centerTitle: true,
       ),
-      body: CustomScrollView(
-        slivers: [
-        SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-          return ExposureDetector(key: Key('column_scroll_$index'),child: Container(
-            alignment: Alignment.center,
-            height: 250,
-            child: Text(
-              index.toString(),
-              style: TextStyle(fontSize: 24),
+      body: CustomScrollView(slivers: [
+        SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+          return ExposureDetector(
+            key: Key('column_scroll_$index'),
+            child: Container(
+              alignment: Alignment.center,
+              height: 250,
+              child: Text(
+                index.toString(),
+                style: TextStyle(fontSize: 24),
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  border: Border(
+                      bottom: BorderSide(color: Colors.white, width: 10))),
             ),
-            decoration: BoxDecoration(
-                color: Colors.lightGreen,
-                border:
-                    Border(bottom: BorderSide(color: Colors.white, width: 10))),
-          ),onExposure: (visibilityInfo){
-            Toast.show('第$index 块曝光,展示比例为${visibilityInfo.visibleFraction}', context);
-          },);
-        },childCount: 10)),
+            onExposure: (visibilityInfo) {
+              Toast.show('第$index 块曝光,展示比例为${visibilityInfo.visibleFraction}',
+                  context);
+            },
+          );
+        }, childCount: 10)),
       ]),
     );
   }
 }
-
-

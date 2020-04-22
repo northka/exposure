@@ -7,16 +7,16 @@ import './render_exposure_detector.dart';
 
 class ExposureDetector extends SingleChildRenderObjectWidget {
   const ExposureDetector({
-      @required Key key,
-      @required Widget child,
-      this.onExposure,
-    })  : assert(key != null),
-          assert(child != null),
-          super(key: key, child: child);
+    @required Key key,
+    @required Widget child,
+    this.onExposure,
+  })  : assert(key != null),
+        assert(child != null),
+        super(key: key, child: child);
+
   /// 回调触发曝光函数
   final ExposureCallback onExposure;
 
-  
   @override
   RenderExposureDetector createRenderObject(BuildContext context) {
     return RenderExposureDetector(
@@ -31,7 +31,6 @@ class ExposureDetector extends SingleChildRenderObjectWidget {
     assert(renderObject.key == key);
     renderObject.onExposure = onExposure;
   }
-
 }
 
 typedef ExposureCallback = void Function(VisibilityInfo info);
@@ -114,4 +113,3 @@ bool _floatNear(double f1, double f2) {
   return absDiff <= _kDefaultTolerance ||
       (absDiff / max(f1.abs(), f2.abs()) <= _kDefaultTolerance);
 }
-

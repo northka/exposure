@@ -8,7 +8,6 @@ import 'package:flutter/scheduler.dart';
 import './exposure_detector.dart';
 import './exposure_detector_controller.dart';
 
-
 Iterable<Layer> _getLayerChain(Layer start) {
   final List<Layer> layerChain = <Layer>[];
   for (Layer layer = start; layer != null; layer = layer.parent) {
@@ -16,7 +15,6 @@ Iterable<Layer> _getLayerChain(Layer start) {
   }
   return layerChain.reversed;
 }
-
 
 Matrix4 _accumulateTransforms(Iterable<Layer> layerChain) {
   assert(layerChain != null);
@@ -31,7 +29,6 @@ Matrix4 _accumulateTransforms(Iterable<Layer> layerChain) {
   }
   return transform;
 }
-
 
 Rect _localRectToGlobal(Layer layer, Rect localRect) {
   final Iterable<Layer> layerChain = _getLayerChain(layer);
@@ -50,83 +47,81 @@ class ExposureTimeLayer {
 
 class ExposureDetectorLayer extends ContainerLayer {
   ExposureDetectorLayer(
-      {
-      @required this.key,
+      {@required this.key,
       @required this.widgetSize,
       @required this.paintOffset,
-      this.onExposureChanged
-      })
+      this.onExposureChanged})
       : assert(key != null),
         assert(paintOffset != null),
         assert(widgetSize != null),
         assert(onExposureChanged != null),
         _layerOffset = Offset.zero;
-    static Timer _timer;
+  static Timer _timer;
 
-    static final _updated = <Key, ExposureDetectorLayer>{};
+  static final _updated = <Key, ExposureDetectorLayer>{};
 
-    final Key key;
+  final Key key;
 
-    final Size widgetSize;
+  final Size widgetSize;
 
-    Offset _layerOffset;
+  Offset _layerOffset;
 
-    final Offset paintOffset;
+  final Offset paintOffset;
 
-    final ExposureCallback onExposureChanged;
+  final ExposureCallback onExposureChanged;
 
-    static List<Key> toRemove = [];
+  static List<Key> toRemove = [];
 
-    static final _exposureTime = <Key, ExposureTimeLayer>{};
+  static final _exposureTime = <Key, ExposureTimeLayer>{};
 
+  bool filter = false;
+  static void setScheduleUpdate() {
+    final bool isFirstUpdate = _updated.isEmpty;
 
-    bool filter = false;
-    static void setScheduleUpdate() {
-      final bool isFirstUpdate = _updated.isEmpty;
-
-      final updateInterval = ExposureDetectorController.instance.updateInterval;
-      if (updateInterval == Duration.zero) {
-        if (isFirstUpdate) {
-          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-            _processCallbacks();
-          });
-        }
-      } else if (_timer == null) {
-        _timer = Timer(updateInterval, _handleTimer);
-      } else {
-        assert(_timer.isActive);
+    final updateInterval = ExposureDetectorController.instance.updateInterval;
+    if (updateInterval == Duration.zero) {
+      if (isFirstUpdate) {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          _processCallbacks();
+        });
       }
+    } else if (_timer == null) {
+      _timer = Timer(updateInterval, _handleTimer);
+    } else {
+      assert(_timer.isActive);
     }
+  }
 
-    void _scheduleUpdate() {
-      final bool isFirstUpdate = _updated.isEmpty;
-      _updated[key] = this;
+  void _scheduleUpdate() {
+    final bool isFirstUpdate = _updated.isEmpty;
+    _updated[key] = this;
 
-      final updateInterval = ExposureDetectorController.instance.updateInterval;
-      if (updateInterval == Duration.zero) {
-        if (isFirstUpdate) {
-          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-            _processCallbacks();
-          });
-        }
-      } else if (_timer == null) {
-        _timer = Timer(updateInterval, _handleTimer);
-      } else {
-        assert(_timer.isActive);
+    final updateInterval = ExposureDetectorController.instance.updateInterval;
+    if (updateInterval == Duration.zero) {
+      if (isFirstUpdate) {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          _processCallbacks();
+        });
       }
+    } else if (_timer == null) {
+      _timer = Timer(updateInterval, _handleTimer);
+    } else {
+      assert(_timer.isActive);
     }
+  }
 
-    static void _handleTimer() {
-      _timer = null;
-      _exposureTime.forEach((key, exposureLayer) {
-        if (_updated[key] == null) {
-          _updated[key] = exposureLayer.layer;
-        }
-      });
-      /// 确保在两次绘制中计算完
-      SchedulerBinding.instance
-          .scheduleTask<void>(_processCallbacks, Priority.touch);
-    }
+  static void _handleTimer() {
+    _timer = null;
+    _exposureTime.forEach((key, exposureLayer) {
+      if (_updated[key] == null) {
+        _updated[key] = exposureLayer.layer;
+      }
+    });
+
+    /// 确保在两次绘制中计算完
+    SchedulerBinding.instance
+        .scheduleTask<void>(_processCallbacks, Priority.touch);
+  }
 
   /// 计算组件的矩形
   Rect _computeWidgetBounds() {
@@ -177,16 +172,17 @@ class ExposureDetectorLayer extends ContainerLayer {
           key: layer.key,
           widgetBounds: widgetBounds,
           clipRect: layer._computeClipRect());
-      if (info.visibleFraction >= 0.5 ) {
-        if (_exposureTime[layer.key] != null && _exposureTime[layer.key].time > 0) {
-          if (nowTime - _exposureTime[layer.key].time > ExposureDetectorController.instance.exposureTime) {
+      if (info.visibleFraction >= 0.5) {
+        if (_exposureTime[layer.key] != null &&
+            _exposureTime[layer.key].time > 0) {
+          if (nowTime - _exposureTime[layer.key].time >
+              ExposureDetectorController.instance.exposureTime) {
             layer.onExposureChanged(info);
             toRemove.add(layer.key);
           } else {
             setScheduleUpdate();
             toReserveList.add(layer.key);
             _exposureTime[layer.key].layer = layer;
-
           }
         } else {
           _exposureTime[layer.key] = ExposureTimeLayer(nowTime, layer);
@@ -197,7 +193,6 @@ class ExposureDetectorLayer extends ContainerLayer {
       }
 
       _exposureTime.removeWhere((key, _) => !toReserveList.contains(key));
-    
     }
 
     toRemove.forEach((key) {
@@ -212,7 +207,7 @@ class ExposureDetectorLayer extends ContainerLayer {
       _updated[key].filter = true;
       _updated.remove(key);
     }
-    
+
     if (_updated.isEmpty) {
       _timer?.cancel();
       _timer = null;
@@ -233,7 +228,7 @@ class ExposureDetectorLayer extends ContainerLayer {
   @override
   void attach(Object owner) {
     super.attach(owner);
-    if (!filter) { 
+    if (!filter) {
       _scheduleUpdate();
     }
   }
@@ -245,7 +240,7 @@ class ExposureDetectorLayer extends ContainerLayer {
 
     // The Layer might no longer be visible.  We'll figure out whether it gets
     // re-attached later.
-    if (!filter) { 
+    if (!filter) {
       _scheduleUpdate();
     }
   }
