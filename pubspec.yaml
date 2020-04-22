@@ -1,5 +1,5 @@
 name: exposure
-version: 1.0.1
+version: 1.0.3
 description: >
   Sensor widget for flutter that notifies you when it is exposured
 homepage: https://github.com/northka/exposure
@@ -13,4 +13,4 @@ dev_dependencies:
     sdk: flutter
 environment:
   sdk: ">=2.0.0-dev.28.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.5 <2.0.0"
+  flutter: ">=1.5.4-hotfix.2 <2.0.0"

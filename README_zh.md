@@ -10,7 +10,7 @@
 将下列代码加入到pubspec.yaml文件
 ```yaml
 dependencies:
-  exposure: ^1.0.0
+  exposure: ^1.0.3
 ```
 
 用法

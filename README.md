@@ -1,18 +1,21 @@
 Exposure Widget
 ====
-This is a widget that can automatically monitor whether the child widget is exposed<br/>
-When the child widget is found in the window viewport, it begin detecting<br/> 
-When stay time exceeds the exposure time condition (default is 0.5s) and the exposure area is greater than the visibility fraction condition (default 50%)<br/>
-It will trigger the exposure callback and record the Key value in a queue (the default is to store up to 100 keys).
-Encounter the same key in the queue, no more exposure detection
+This is a widget that can automatically monitor whether the child widget is exposed
+
+When the child widget is found in the window viewport, it begin detecting.
+
+When stay time exceeds the exposure time condition (default is 0.5s) and the exposure area is greater than the visibility fraction condition (default 50%),It will trigger the exposure callback and record the Key value in a queue (the default is to store up to 100 keys).
+
+When encounter the same key in the queue, it will don't detect
 
 install
 ----
 Add this to your package's pubspec.yaml file
 ```yaml
 dependencies:
-  exposure: ^1.0.0
+  exposure: ^1.0.3
 ```
+
 use
 ----
 ```dart
