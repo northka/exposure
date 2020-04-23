@@ -1,5 +1,7 @@
 Exposure Widget
 ====
+[中文](./README_CN.md)
+
 This is a widget that can automatically monitor whether the child widget is exposed
 
 When the child widget is found in the window viewport, it begin detecting.
