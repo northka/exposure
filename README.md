@@ -8,7 +8,7 @@ When the child widget is found in the window viewport, it begin detecting.
 
 When stay time exceeds the exposure time condition (default is 0.5s) and the exposure area is greater than the visibility fraction condition (default 50%),It will trigger the exposure callback and record the Key value in a queue (the default is to store up to 100 keys).
 
-When encounter the same key in the queue, it will don't detect
+When encounter the same key in the queue, it won't detect
 
 install
 ----
