@@ -16,7 +16,7 @@ dependencies:
   exposure: ^1.0.3
 ```
 
-use
+usage
 ----
 ```dart
 ExposureDetector({
