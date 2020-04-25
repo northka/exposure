@@ -45,7 +45,7 @@ ExposureDetector({
 Configuration
 ---
 
-* ExposureDetectorController.instance.setFilterList：Function Set key queue<br/>
-* ExposureDetectorController.instance.exposureTime：int Set exposure time condition (ms)<br/>
-* ExposureDetectorController.instance.exposureFraction：double Set visibility fraction condition<br/>
-* ExposureDetectorController.instance.updateInterval：Duration Set delay detection time
+* ExposureDetectorController.instance.setFilterList：Function (default 100) Set key queue<br/>
+* ExposureDetectorController.instance.exposureTime：Int (default 500) Set exposure time condition (ms)<br/>
+* ExposureDetectorController.instance.exposureFraction：Double (default 0.5) Set visibility fraction condition<br/>
+* ExposureDetectorController.instance.updateInterval：Duration (default Duration(milliseconds: 200))Set delay detection time
