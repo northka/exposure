@@ -31,7 +31,7 @@ ExposureDetector({
 
 [动画模块曝光](./example/exposureAnimateExample.dart)
 
-![animateExposure](./assets/animate_exposure.gif)
+![animateExposure](./assets/animation_exposure.gif)
 
 [弹窗曝光](./example/exposureDialogExample.dart)
 

@@ -36,7 +36,7 @@ ExposureDetector({
 
 [Animate Exposure](./example/exposureAnimateExample.dart)
 
-![animateExposure](./assets/animate_exposure_en.gif)
+![animateExposure](./assets/animation_exposure_en.gif)
 
 [Dialog Exposure](./example/exposureDialogExample.dart)
 
