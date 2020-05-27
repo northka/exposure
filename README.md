@@ -32,15 +32,15 @@ ExposureDetector({
 
 [Scroll List Exposure](./example/exposureScrollExample.dart)
 
-![scroll Exposure](./assets/scrollExposure.gif)
+![scroll Exposure](./assets/scroll_exposure_en.gif)
 
 [Animate Exposure](./example/exposureAnimateExample.dart)
 
-![animateExposure](./assets/animateExposure.gif)
+![animateExposure](./assets/animate_exposure_en.gif)
 
 [Dialog Exposure](./example/exposureDialogExample.dart)
 
-![dialogExposure](./assets/dialogExposure.gif)
+![dialogExposure](./assets/dialog_exposure.gif)
 
 Configuration
 ---

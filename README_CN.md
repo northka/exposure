@@ -22,19 +22,20 @@ ExposureDetector({
     exposure: callBack // 曝光回调
 });
 ```
+
 ####示例代码
 
 [列表滑动模块曝光](./example/exposureScrollExample.dart)
 
-![scrollExposure](./assets/scrollExposure.gif)
+![scrollExposure](./assets/scroll_exposure.gif)
 
 [动画模块曝光](./example/exposureAnimateExample.dart)
 
-![animateExposure](./assets/animateExposure.gif)
+![animateExposure](./assets/animate_exposure.gif)
 
 [弹窗曝光](./example/exposureDialogExample.dart)
 
-![dialogExposure](./assets/dialogExposure.gif)
+![dialogExposure](./assets/dialog_exposure.gif)
 
 配置
 ---
