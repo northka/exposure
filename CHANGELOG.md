@@ -1,14 +1,18 @@
+## 1.0.4
+
+Change readme assets.
+
 ## 1.0.3
 
-change dependencies
+Change dependencies.
 
 ## 1.0.2
 
-change dependencies
+Change dependencies.
 
 ## 1.0.1
 
-optimize code format and give more detail 
+Optimize code format and give more detail. 
 
 ## 1.0.0
 
